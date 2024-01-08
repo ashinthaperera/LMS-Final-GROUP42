@@ -1,0 +1,33 @@
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  # Add any environment-specific variables here
+
+before_script:
+  - npm install
+
+# Build stage
+build:
+  stage: build
+  script:
+    - npm run build
+  artifacts:
+    paths:
+      - build/
+
+# Test stage
+test:
+  stage: test
+  script:
+    - npm test
+
+# Deploy stage
+deploy:
+  stage: deploy
+  script:
+    - echo "Deploy to production"
+  only:
+    - master # Only deploy when changes are pushed to the master branch
